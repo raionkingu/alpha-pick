@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PictureWidget.hpp"
+#include "ColorDock.hpp"
 
 #include <QMainWindow>
 #include <QScrollArea>
@@ -24,6 +25,7 @@ signals:
 private:
 	QScrollArea *scroll_area;
 	PictureWidget *picture_widget;
+	ColorDock *color_dock;
 	
 	bool askForSave();
 };

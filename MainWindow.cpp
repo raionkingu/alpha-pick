@@ -56,6 +56,13 @@ MainWindow::MainWindow(QWidget *parent):
 	scroll_area->setBackgroundRole(QPalette::Dark);
 	scroll_area->setFrameStyle(QFrame::NoFrame);
 	setCentralWidget(scroll_area);
+
+	color_dock = new ColorDock(this);
+	QDockWidget *dock = new QDockWidget(this);
+	dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+	dock->setTitleBarWidget(new QWidget(dock));
+	addDockWidget(Qt::BottomDockWidgetArea, dock);
+	dock->setWidget(color_dock);
 }
 
 void MainWindow::onOpen()
