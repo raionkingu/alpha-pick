@@ -64,14 +64,33 @@ void PictureWidget::save()
 	has_changes = false;
 }
 
+void PictureWidget::changeColorKey(QColor color)
+{
+	QImage image(picture_image.copy());
+
+	const int w = image.width();
+	const int h = image.height();
+
+	for (int i = 0; i < w; ++i)
+	{
+		for (int j = 0; j < h; ++j)
+		{
+			if (image.pixelColor(i, j) == color)
+			{
+				image.setPixelColor(i, j, QColor(0, 0, 0, 0));
+				has_changes = true;
+			}
+		}
+	}
+
+	picture_sprite.convertFromImage(image);
+	picture_label->setPixmap(picture_sprite);
+}
+
 void PictureWidget::mousePressEvent(QMouseEvent *event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
-	//	TODO
+		emit colorSelected(picture_image.pixelColor(event->x(), event->y()));
 	}
-}
-
-void PictureWidget::mouseMoveEvent(QMouseEvent */*event*/)
-{
 }

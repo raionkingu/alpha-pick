@@ -12,8 +12,12 @@ public:
 	explicit ColorDock(QWidget *parent = nullptr);
 	
 	QColor getColor() const;
+	
 signals:
 	void colorSelected(QColor);
+	
+public slots:
+	void changeColorKey(QColor color);
 	
 private slots:
 	void setColor();

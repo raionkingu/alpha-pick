@@ -16,6 +16,12 @@ public:
 	bool hasChanges() const;
 	void save();
 	
+signals:
+	void colorSelected(QColor color);
+	
+public slots:
+	void changeColorKey(QColor color);
+	
 private:
 	QLabel *background_label, *picture_label;
 	QPixmap background_sprite, picture_sprite;
@@ -27,5 +33,4 @@ private:
 	void resetUI();
 	
 	void mousePressEvent(QMouseEvent *event) override;
-	void mouseMoveEvent(QMouseEvent *event) override;
 };

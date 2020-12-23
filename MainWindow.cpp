@@ -9,7 +9,9 @@
 
 MainWindow::MainWindow(QWidget *parent):
 	QMainWindow(parent),
-	scroll_area(new QScrollArea(this))
+	scroll_area(new QScrollArea(this)),
+	picture_widget(nullptr),
+	color_dock(nullptr)
 {
 	QMenu *file_menu = menuBar()->addMenu(tr("&File"));
 	
@@ -84,6 +86,8 @@ void MainWindow::onOpen()
 			delete picture_widget;
 		
 		picture_widget = new PictureWidget(filename, scroll_area);
+		connect(color_dock, &ColorDock::colorSelected, picture_widget, &PictureWidget::changeColorKey);
+		connect(picture_widget, &PictureWidget::colorSelected, color_dock, &ColorDock::changeColorKey);
 		scroll_area->setWidget(picture_widget);
 		emit enableMenuItems(true);
 	}
@@ -97,6 +101,8 @@ void MainWindow::onClose()
 		if (!askForSave())
 			return;
 	
+	disconnect(color_dock, &ColorDock::colorSelected, picture_widget, &PictureWidget::changeColorKey);
+	disconnect(picture_widget, &PictureWidget::colorSelected, color_dock, &ColorDock::changeColorKey);
 	delete picture_widget;
 	picture_widget = nullptr;
 	emit enableMenuItems(false);

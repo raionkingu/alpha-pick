@@ -14,7 +14,7 @@ ColorDock::ColorDock(QWidget *parent):
 	color_button->move(68, 4);
 	color_button->setFixedHeight(32);
 	
-	updateUI();
+//	updateUI();
 	
 	connect(color_button, &QPushButton::clicked, this, &ColorDock::setColor);
 }
@@ -37,10 +37,13 @@ void ColorDock::setColor()
 	QColor color = QColorDialog::getColor(selected_color, this, tr("Pick a color"));
 	
 	if (color.isValid())
-	{
-		selected_color = color;
-		updateUI();
-		
-		emit colorSelected(color);
-	}
+		changeColorKey(color);
+}
+
+void ColorDock::changeColorKey(QColor color)
+{
+	selected_color = color;
+	updateUI();
+	
+	emit colorSelected(color);
 }
