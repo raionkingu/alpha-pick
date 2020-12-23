@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent):
 	connect(action_open, &QAction::triggered, this, &MainWindow::onOpen);
 	file_menu->addAction(action_open);
 	
-	QAction *action_close = new QAction(tr("&Close..."), this);
+	QAction *action_close = new QAction(tr("&Close"), this);
 	action_close->setIcon(QIcon::fromTheme("document-close"));
 	action_close->setShortcut(QKeySequence::Close);
 	connect(action_close, &QAction::triggered, this, &MainWindow::onClose);

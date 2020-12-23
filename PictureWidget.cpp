@@ -12,6 +12,8 @@ PictureWidget::PictureWidget(QString &filename, QWidget *parent):
 	filename(filename),
 	has_changes(false)
 {
+	picture_image.convertTo(QImage::Format_RGBA8888);
+	
 	resetUI();
 }
 
